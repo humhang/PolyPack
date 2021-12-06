@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/hang/CLionProjects/PolyPack/Helper.h
+type_traits
+-
+array
+-
+
+/Users/hang/CLionProjects/PolyPack/PolyInterpolation.h
+type_traits
+-
+array
+-
+Polynomial.h
+/Users/hang/CLionProjects/PolyPack/Polynomial.h
+Helper.h
+/Users/hang/CLionProjects/PolyPack/Helper.h
+
+/Users/hang/CLionProjects/PolyPack/Polynomial.h
+type_traits
+-
+array
+-
+algorithm
+-
+Helper.h
+/Users/hang/CLionProjects/PolyPack/Helper.h
+
+/Users/hang/CLionProjects/PolyPack/main.cpp
+iostream
+-
+array
+-
+Polynomial.h
+/Users/hang/CLionProjects/PolyPack/Polynomial.h
+PolyInterpolation.h
+/Users/hang/CLionProjects/PolyPack/PolyInterpolation.h
+type_traits
+-
+
