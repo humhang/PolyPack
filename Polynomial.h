@@ -180,7 +180,7 @@ public:
   }
 
   /*
-   * evaluate recursively with Horner's method, for polynomial deg == 1
+   * evaluate recursively with Horner's method, for polynomial deg == 0
    */
   template<typename... Dummy, unsigned int N_ = N>
   constexpr typename std::enable_if<(N_ == 0), T>::type
@@ -235,7 +235,8 @@ public:
   template<unsigned int r = 1, typename... Dummy, unsigned int N_ = N>
   constexpr typename std::enable_if<((N_ == 0) && (r >= 1)), Polynomial<0, T> >::type
   derivative() const {
-    static_assert(sizeof...(Dummy) == 0, "Do not specify template arguments!");
+
+    static_assert(sizeof...(Dummy) == 0, "Do not specify template arguments other than the number of derivative!");
 
     Polynomial<0, T> poly_out;
     poly_out.coeffs[0] = 0;
@@ -248,10 +249,10 @@ public:
   template<unsigned int r = 1, typename... Dummy, unsigned int N_ = N>
   constexpr typename std::enable_if<((r == 0)), Polynomial<N_, T> >::type
   derivative() const {
-    static_assert(sizeof...(Dummy) == 0, "Do not specify template arguments!");
+
+    static_assert(sizeof...(Dummy) == 0, "Do not specify template arguments other than the number of derivative!");
 
     return *this;
-
   }
 
 

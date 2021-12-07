@@ -1,3 +1,0 @@
-/home/hang/Documents/projects/polypack/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/hang/Documents/projects/polypack/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/hang/Documents/projects/polypack/cmake-build-debug/CMakeFiles/PolyPack.dir
