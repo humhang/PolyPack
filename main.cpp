@@ -39,12 +39,11 @@ int main(){
   constexpr std::array<double, 1> reconstruction_coeff = calculate_reconstruction_coefficients_from_cell_to_face_for_uniformly_spaced_points<1, double>(0);
 
 
-  constexpr auto c = WENO_Uniform_Reconstruction_Coefficients<3, double>::c;
+   constexpr auto c = WENO_Uniform_Reconstruction_Coefficients<3, double>::c;
 
-  constexpr auto d = WENO_Uniform_Reconstruction_Coefficients<3, double>::d;
+   constexpr auto d = WENO_Uniform_Reconstruction_Coefficients<3, double>::d;
 
-  constexpr auto s = WENO_Uniform_Reconstruction_Coefficients<3, double>::s;
-
+   constexpr auto s = WENO_Uniform_Reconstruction_Coefficients<3, double>::s;
 
   return 0;
 }

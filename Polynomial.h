@@ -224,7 +224,7 @@ public:
 
     Polynomial<N_ - 1, T> poly_out;
     for (unsigned int n = 0; n <= N_ - 1; ++n) {
-      poly_out.coeffs[n] = (n + 1) * coeffs[n + 1];
+      poly_out.coeffs[n] = static_cast<T>(n + 1) * coeffs[n + 1];
     }
     return poly_out;
   }
@@ -265,7 +265,7 @@ public:
     Polynomial<N + 1, T> poly_out;
     poly_out.coeffs[0] = constant;
     for (unsigned int n = 1; n <= N + 1; ++n) {
-      poly_out.coeffs[n] = 1 / n * coeffs[n - 1];
+      poly_out.coeffs[n] = coeffs[n - 1] / static_cast<T>(n);
     }
 
     return poly_out;

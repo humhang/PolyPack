@@ -58,12 +58,12 @@ static constexpr std::array<T, N> getArray_OneAtAndAfterIndex(const unsigned int
 
 }
 
-template <auto Start, auto End, auto Inc, class F>
+template <auto begin, auto end, auto increment, class F>
 constexpr void constexpr_for(F&& f) {
 
-  if constexpr (Start < End) {
-    f(std::integral_constant<decltype(Start), Start>());
-    constexpr_for<Start + Inc, End, Inc>(f);
+  if constexpr (begin < end) {
+    f(std::integral_constant<decltype(begin), begin>());
+    constexpr_for<begin + increment, end, increment>(f);
   }
 
 }
