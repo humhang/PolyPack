@@ -45,19 +45,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
+CMAKE_COMMAND = /home/hang/opt/clion-2019.2.1/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E rm -f
+RM = /home/hang/opt/clion-2019.2.1/bin/cmake/linux/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/hang/CLionProjects/PolyPack
+CMAKE_SOURCE_DIR = /home/hang/Documents/projects/polypack
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/hang/CLionProjects/PolyPack/cmake-build-debug
+CMAKE_BINARY_DIR = /home/hang/Documents/projects/polypack/cmake-build-debug
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -81,14 +81,14 @@ clean: CMakeFiles/PolyPack.dir/clean
 CMakeFiles/PolyPack.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/PolyPack.dir/build.make CMakeFiles/PolyPack.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/PolyPack.dir/build.make CMakeFiles/PolyPack.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/hang/CLionProjects/PolyPack/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target PolyPack"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/hang/Documents/projects/polypack/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target PolyPack"
 .PHONY : CMakeFiles/PolyPack.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/PolyPack.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/hang/CLionProjects/PolyPack/cmake-build-debug/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hang/Documents/projects/polypack/cmake-build-debug/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/PolyPack.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/hang/CLionProjects/PolyPack/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hang/Documents/projects/polypack/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/PolyPack.dir/rule
 
 # Convenience name for target.

@@ -6,23 +6,23 @@
 
 #IncludeRegexTransform: 
 
-/Users/hang/CLionProjects/PolyPack/Helper.h
+/home/hang/Documents/projects/polypack/Helper.h
 type_traits
 -
 array
 -
 
-/Users/hang/CLionProjects/PolyPack/PolyInterpolation.h
+/home/hang/Documents/projects/polypack/PolyInterpolation.h
 type_traits
 -
 array
 -
 Polynomial.h
-/Users/hang/CLionProjects/PolyPack/Polynomial.h
+/home/hang/Documents/projects/polypack/Polynomial.h
 Helper.h
-/Users/hang/CLionProjects/PolyPack/Helper.h
+/home/hang/Documents/projects/polypack/Helper.h
 
-/Users/hang/CLionProjects/PolyPack/Polynomial.h
+/home/hang/Documents/projects/polypack/Polynomial.h
 type_traits
 -
 array
@@ -30,17 +30,17 @@ array
 algorithm
 -
 Helper.h
-/Users/hang/CLionProjects/PolyPack/Helper.h
+/home/hang/Documents/projects/polypack/Helper.h
 
-/Users/hang/CLionProjects/PolyPack/main.cpp
+/home/hang/Documents/projects/polypack/main.cpp
 iostream
 -
 array
 -
 Polynomial.h
-/Users/hang/CLionProjects/PolyPack/Polynomial.h
+/home/hang/Documents/projects/polypack/Polynomial.h
 PolyInterpolation.h
-/Users/hang/CLionProjects/PolyPack/PolyInterpolation.h
+/home/hang/Documents/projects/polypack/PolyInterpolation.h
 type_traits
 -
 

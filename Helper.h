@@ -12,6 +12,14 @@ static constexpr bool is_odd(unsigned int n) {
   return n % 2;
 }
 
+static constexpr unsigned int minusOrZero(unsigned int m, unsigned int n) {
+  unsigned int k = 0;
+  if (m > n) {
+    k = m - n;
+  }
+  return k;
+}
+
 template<size_t N, typename T>
 static constexpr std::array<T, N-1> deleteOne(const std::array<T, N>& array, const unsigned int index_to_delete){
 
@@ -49,5 +57,17 @@ static constexpr std::array<T, N> getArray_OneAtAndAfterIndex(const unsigned int
   return array_out;
 
 }
+
+template <auto Start, auto End, auto Inc, class F>
+constexpr void constexpr_for(F&& f) {
+
+  if constexpr (Start < End) {
+    f(std::integral_constant<decltype(Start), Start>());
+    constexpr_for<Start + Inc, End, Inc>(f);
+  }
+
+}
+
+
 
 #endif //POLYPACK__HELPER_H

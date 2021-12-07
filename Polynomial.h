@@ -28,12 +28,12 @@ public:
    * friends operators
    */
   template<unsigned int N_, typename T_>
-  friend constexpr Polynomial<N_, T_> operator*(const T_& scalar, const Polynomial<N_, T_>& poly);
+  friend constexpr Polynomial<N_, T_> operator*(const T_ &scalar, const Polynomial<N_, T_> &poly);
 
   /*
    * default constructor
    */
-  constexpr Polynomial() : coeffs({}){};
+  constexpr Polynomial() : coeffs({}) {};
 
   /*
    * constructor from coefficients
@@ -159,7 +159,7 @@ public:
   operator*(const T scalar) const {
 
     Polynomial<N, T> poly_out;
-    for(unsigned int n = 0; n <= N; ++n) {
+    for (unsigned int n = 0; n <= N; ++n) {
       poly_out.coeffs[n] = scalar * coeffs[n];
     }
 
@@ -170,12 +170,12 @@ public:
    * evaluate recursively with Horner's method, for polynomial deg > 0
    */
   template<typename... Dummy, unsigned int N_ = N>
-  constexpr typename std::enable_if<(N_>0), T>::type
+  constexpr typename std::enable_if<(N_ > 0), T>::type
   evaluate(const T t) const {
-    static_assert(sizeof...(Dummy)==0, "Do not specify template arguments!");
+    static_assert(sizeof...(Dummy) == 0, "Do not specify template arguments!");
 
-    Polynomial<N_-1, T> poly_one_less(deleteOne(coeffs, 0));
-    T out = poly_one_less.evaluate(t)*t + coeffs[0];
+    Polynomial<N_ - 1, T> poly_one_less(deleteOne(coeffs, 0));
+    T out = poly_one_less.evaluate(t) * t + coeffs[0];
     return out;
   }
 
@@ -183,9 +183,9 @@ public:
    * evaluate recursively with Horner's method, for polynomial deg == 1
    */
   template<typename... Dummy, unsigned int N_ = N>
-  constexpr typename std::enable_if<(N_==0), T>::type
+  constexpr typename std::enable_if<(N_ == 0), T>::type
   evaluate(const T /*t*/) const {
-    static_assert(sizeof...(Dummy)==0, "Do not specify template arguments!");
+    static_assert(sizeof...(Dummy) == 0, "Do not specify template arguments!");
 
     return coeffs[0];
   }
@@ -198,31 +198,44 @@ public:
     return evaluate(t);
   }
 
-
   /*
-   * taking derivative of the polynomial, for degree > 0
-   * TODO: maybe we can make this recursive just like others;
+   * taking r-th derivative for polynomial, if r > 1 and degree > 0
    */
-  template<typename... Dummy, unsigned int N_ = N>
-  constexpr typename std::enable_if< (N_ > 0), Polynomial<N_-1, T> >::type
+  template<unsigned int r = 1, typename... Dummy, unsigned int N_ = N>
+  constexpr typename std::enable_if<((N_ > 0) && (r > 1)), Polynomial<minusOrZero(N_, r), T> >::type
   derivative() const {
-    static_assert(sizeof...(Dummy)==0, "Do not specify template arguments!");
 
-    Polynomial<N_-1, T> poly_out;
-    for(unsigned int n = 0; n <= N_-1; ++n) {
-      poly_out.coeffs[n] = (n+1) * coeffs[n+1];
-    }
-    return poly_out;
+    static_assert(sizeof...(Dummy) == 0, "Do not specify template arguments other than the number of derivative!");
+
+    const auto poly_derivative_r_minus_one_times = derivative<r-1>();
+
+    return poly_derivative_r_minus_one_times.derivative();
 
   }
 
   /*
-   * taking derivative of the polynomial, for degree = 0. Return 0 then.
+   * taking r-th derivative for polynomial, if r = 1 and degree > 0
    */
-  template<typename... Dummy, unsigned int N_ = N>
-  constexpr typename std::enable_if< (N_ == 0), Polynomial<0, T> >::type
+  template<unsigned int r = 1, typename... Dummy, unsigned int N_ = N>
+  constexpr typename std::enable_if<((N_ > 0) && (r == 1)), Polynomial<minusOrZero(N_, r), T> >::type
   derivative() const {
-    static_assert(sizeof...(Dummy)==0, "Do not specify template arguments!");
+
+    static_assert(sizeof...(Dummy) == 0, "Do not specify template arguments other than the number of derivative!");
+
+    Polynomial<N_ - 1, T> poly_out;
+    for (unsigned int n = 0; n <= N_ - 1; ++n) {
+      poly_out.coeffs[n] = (n + 1) * coeffs[n + 1];
+    }
+    return poly_out;
+  }
+
+  /*
+   * taking r-th derivative for polynomial, if r >= 0 and degree = 0
+   */
+  template<unsigned int r = 1, typename... Dummy, unsigned int N_ = N>
+  constexpr typename std::enable_if<((N_ == 0) && (r >= 1)), Polynomial<0, T> >::type
+  derivative() const {
+    static_assert(sizeof...(Dummy) == 0, "Do not specify template arguments!");
 
     Polynomial<0, T> poly_out;
     poly_out.coeffs[0] = 0;
@@ -230,17 +243,32 @@ public:
   }
 
   /*
+   * taking r-th derivative for polynomial, if r = 0
+   */
+  template<unsigned int r = 1, typename... Dummy, unsigned int N_ = N>
+  constexpr typename std::enable_if<((r == 0)), Polynomial<N_, T> >::type
+  derivative() const {
+    static_assert(sizeof...(Dummy) == 0, "Do not specify template arguments!");
+
+    return *this;
+
+  }
+
+
+  /*
    * indefinite integral of the polynomial
    * TODO: maybe we can make this recursive just like others;
    */
-  constexpr Polynomial<N+1, T>
+  constexpr Polynomial<N + 1, T>
   integrate(const T constant = 0) const {
 
-    Polynomial<N+1, T> poly_out;
+    Polynomial<N + 1, T> poly_out;
     poly_out.coeffs[0] = constant;
-    for(unsigned int n = 1; n <= N+1; ++n) {
-      poly_out.coeffs[n] = 1/n * coeffs[n-1];
+    for (unsigned int n = 1; n <= N + 1; ++n) {
+      poly_out.coeffs[n] = 1 / n * coeffs[n - 1];
     }
+
+    return poly_out;
 
   }
 
@@ -250,12 +278,11 @@ public:
   constexpr T
   integrate(const T lower, const T upper) const {
 
-    constexpr Polynomial<N+1, T> poly = integrate(0);
+    const Polynomial<N + 1, T> poly = integrate();
 
     return poly(upper) - poly(lower);
 
   }
-
 
 private:
 
@@ -266,11 +293,10 @@ private:
 
 };
 
-
 template<unsigned int N, typename T>
-constexpr Polynomial<N, T> operator*(const T& scalar, const Polynomial<N, T>& poly) {
+constexpr Polynomial<N, T> operator*(const T &scalar, const Polynomial<N, T> &poly) {
   Polynomial<N, T> poly_out;
-  for(unsigned int n = 0; n <= N; ++n) {
+  for (unsigned int n = 0; n <= N; ++n) {
     poly_out.coeffs[n] = scalar * poly.coeffs[n];
   }
 

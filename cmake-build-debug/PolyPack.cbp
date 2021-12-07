@@ -8,82 +8,86 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/Users/hang/CLionProjects/PolyPack/cmake-build-debug"/>
+				<Option working_dir="/home/hang/Documents/projects/polypack/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/opt/local/bin/gmake -j8 -f &quot;/Users/hang/CLionProjects/PolyPack/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/opt/local/bin/gmake -j8 -f &quot;/Users/hang/CLionProjects/PolyPack/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/opt/local/bin/gmake -j8 -f &quot;/Users/hang/CLionProjects/PolyPack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/opt/local/bin/gmake -j8 -f &quot;/Users/hang/CLionProjects/PolyPack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/hang/Documents/projects/polypack/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/hang/Documents/projects/polypack/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/hang/Documents/projects/polypack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/hang/Documents/projects/polypack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/Users/hang/CLionProjects/PolyPack/cmake-build-debug"/>
+				<Option working_dir="/home/hang/Documents/projects/polypack/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/opt/local/bin/gmake -j8 -f &quot;/Users/hang/CLionProjects/PolyPack/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/opt/local/bin/gmake -j8 -f &quot;/Users/hang/CLionProjects/PolyPack/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/opt/local/bin/gmake -j8 -f &quot;/Users/hang/CLionProjects/PolyPack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/opt/local/bin/gmake -j8 -f &quot;/Users/hang/CLionProjects/PolyPack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/hang/Documents/projects/polypack/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/hang/Documents/projects/polypack/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/hang/Documents/projects/polypack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/hang/Documents/projects/polypack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/Users/hang/CLionProjects/PolyPack/cmake-build-debug"/>
+				<Option working_dir="/home/hang/Documents/projects/polypack/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/opt/local/bin/gmake -j8 -f &quot;/Users/hang/CLionProjects/PolyPack/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/opt/local/bin/gmake -j8 -f &quot;/Users/hang/CLionProjects/PolyPack/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/opt/local/bin/gmake -j8 -f &quot;/Users/hang/CLionProjects/PolyPack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/opt/local/bin/gmake -j8 -f &quot;/Users/hang/CLionProjects/PolyPack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/hang/Documents/projects/polypack/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/hang/Documents/projects/polypack/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/hang/Documents/projects/polypack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/hang/Documents/projects/polypack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="PolyPack">
-				<Option output="/Users/hang/CLionProjects/PolyPack/cmake-build-debug/PolyPack" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/hang/CLionProjects/PolyPack/cmake-build-debug"/>
+				<Option output="/home/hang/Documents/projects/polypack/cmake-build-debug/PolyPack" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/hang/Documents/projects/polypack/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/opt/local/bin/gmake -j8 -f &quot;/Users/hang/CLionProjects/PolyPack/cmake-build-debug/Makefile&quot;  VERBOSE=1 PolyPack"/>
-					<CompileFile command="/opt/local/bin/gmake -j8 -f &quot;/Users/hang/CLionProjects/PolyPack/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/opt/local/bin/gmake -j8 -f &quot;/Users/hang/CLionProjects/PolyPack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/opt/local/bin/gmake -j8 -f &quot;/Users/hang/CLionProjects/PolyPack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/hang/Documents/projects/polypack/cmake-build-debug/Makefile&quot;  VERBOSE=1 PolyPack"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/hang/Documents/projects/polypack/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/hang/Documents/projects/polypack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/hang/Documents/projects/polypack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="PolyPack/fast">
-				<Option output="/Users/hang/CLionProjects/PolyPack/cmake-build-debug/PolyPack" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/hang/CLionProjects/PolyPack/cmake-build-debug"/>
+				<Option output="/home/hang/Documents/projects/polypack/cmake-build-debug/PolyPack" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/hang/Documents/projects/polypack/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/opt/local/bin/gmake -j8 -f &quot;/Users/hang/CLionProjects/PolyPack/cmake-build-debug/Makefile&quot;  VERBOSE=1 PolyPack/fast"/>
-					<CompileFile command="/opt/local/bin/gmake -j8 -f &quot;/Users/hang/CLionProjects/PolyPack/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/opt/local/bin/gmake -j8 -f &quot;/Users/hang/CLionProjects/PolyPack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/opt/local/bin/gmake -j8 -f &quot;/Users/hang/CLionProjects/PolyPack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/hang/Documents/projects/polypack/cmake-build-debug/Makefile&quot;  VERBOSE=1 PolyPack/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/hang/Documents/projects/polypack/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/hang/Documents/projects/polypack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/hang/Documents/projects/polypack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/hang/CLionProjects/PolyPack/main.cpp">
+		<Unit filename="/home/hang/Documents/projects/polypack/main.cpp">
 			<Option target="PolyPack"/>
 		</Unit>
-		<Unit filename="/Users/hang/CLionProjects/PolyPack/CMakeLists.txt">
+		<Unit filename="/home/hang/Documents/projects/polypack/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>
