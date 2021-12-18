@@ -13,11 +13,7 @@ static constexpr bool is_odd(unsigned int n) {
 }
 
 static constexpr unsigned int minusOrZero(unsigned int m, unsigned int n) {
-  unsigned int k = 0;
-  if (m > n) {
-    k = m - n;
-  }
-  return k;
+  return m > n ? m - n : 0;
 }
 
 template<size_t N, typename T>
@@ -68,6 +64,29 @@ constexpr void constexpr_for(F&& f) {
 
 }
 
+template<typename>
+std::false_type test_has_operatorPlus(...);
+
+template<typename T>
+std::true_type test_has_operatorPlus(std::remove_reference_t<decltype(std::declval<T>().operator*(std::declval<T>()))>*,
+                                     std::enable_if_t<std::is_same<std::remove_cv_t<std::remove_reference_t<decltype(std::declval<T>().operator*(std::declval<T>()))>>, T>::value, void*>);
+
+template<typename T>
+struct has_operatorPlus {
+  static constexpr bool value = decltype(test_has_operatorPlus<T>(nullptr, nullptr))::value;
+};
+
+template<typename>
+std::false_type test_has_operatorMultiply(...);
+
+template<typename T>
+std::true_type test_has_operatorMultiply(std::remove_reference_t<decltype(std::declval<T>().operator*(std::declval<T>()))>*,
+                                     std::enable_if_t<std::is_same<std::remove_cv_t<std::remove_reference_t<decltype(std::declval<T>().operator*(std::declval<T>()))>>, T>::value, void*>);
+
+template<typename T>
+struct has_operatorMultiply {
+  static constexpr bool value = decltype(test_has_operatorMultiply<T>(nullptr, nullptr))::value;
+};
 
 
 #endif //POLYPACK__HELPER_H
