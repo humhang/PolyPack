@@ -16,6 +16,9 @@
  */
 template<unsigned int N, typename T>
 class Polynomial {
+
+  static_assert(is_field<T>::value);
+
 public:
 
   /*
@@ -62,7 +65,6 @@ public:
 
   /*
    * constructor from roots and the leading coefficient (highest degree), for degree > 0
-   * TODO: maybe if constexpr is a better solution. SFINAE is ugly af.
    */
   template<unsigned int N_ = N,
       typename std::enable_if<(N_ > 0), void *>::type = nullptr>

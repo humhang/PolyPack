@@ -5,6 +5,8 @@
 #ifndef POLYPACK__WENO_H
 #define POLYPACK__WENO_H
 
+#include <cmath>
+
 #include "Helper.h"
 #include "Polynomial.h"
 #include "LagrangeInterpolation.h"
@@ -36,11 +38,11 @@ calculate_reconstruction_smoothness_indicator_coefficients_from_cell_for_uniform
 
   if constexpr(is_odd(Npts)) {
     for(unsigned int k = 0; k < Npts+1; ++k) {
-      faces[k] =  - (static_cast<T>(Npts)-1)/2+static_cast<T>(bias) + static_cast<T>(k) - 0.5;
+      faces[k] =  - (static_cast<T>(Npts)-1)/2+static_cast<T>(bias) + static_cast<T>(k) - half<T>::value;
     }
   } else {
     for(unsigned int k = 0; k < Npts+1; ++k) {
-      faces[k] =  - static_cast<T>(Npts)/2+static_cast<T>(bias)+1 + static_cast<T>(k) - 0.5;
+      faces[k] =  - static_cast<T>(Npts)/2+static_cast<T>(bias)+1 + static_cast<T>(k) - half<T>::value;
     }
   }
   const std::array<Polynomial<Npts, T>, Npts+1> basis_integral = lagrange_interpolation_basis_polynomial(faces);
@@ -57,7 +59,7 @@ calculate_reconstruction_smoothness_indicator_coefficients_from_cell_for_uniform
 
       T coeff = 0;
       constexpr_for<1, Npts, 1>([&basis, m, n, &coeff](auto i){
-        coeff += (basis[m].template derivative<i>() * basis[n].template derivative<i>()).integrate(-1.0/2.0, 1.0/2.0);
+        coeff += (basis[m].template derivative<i>() * basis[n].template derivative<i>()).integrate(-half<T>::value, half<T>::value);
       });
 
       smoothness_indicator_coefficients[m][n] = coeff;
@@ -155,6 +157,56 @@ struct WENO_Uniform_Reconstruction_Coefficients {
   static constexpr std::array<std::array<std::array<T, r>, r>, r> s = get_WENO_Uniform_Reconstruction_Coefficients_s<r, T>();
 
 };
+
+template<unsigned int r, typename T>
+static constexpr T do_WENO(const T array[2*r-1]) {
+
+  constexpr T epsilon = 1e-6;
+
+  T q[r], s[r], w[r];
+
+  /*
+   * candidates
+   */
+  for(int i = 0; i < r; ++i) {
+    q[i] = 0.0;
+    for(int j = 0; j < r; ++j) {
+      q[i] += WENO_Uniform_Reconstruction_Coefficients<r, T>::c[i][j] * array[j+i];
+    }
+  }
+
+  /*
+   * smoothness indicator
+   */
+  for(int i = 0; i < r; ++i) {
+    s[i] = 0.0;
+    for(int j = 0; j < r; ++j) {
+      for(int k = 0; k < r; ++k) {
+        s[i] += WENO_Uniform_Reconstruction_Coefficients<r, T>::s[i][j][k] * array[j+i] * array[k+i];
+      }
+    }
+  }
+
+  /*
+   * nonlinear weight
+   */
+  T wt = 0.0;
+  for(int i = 0; i < r; ++i) {
+    w[i] = WENO_Uniform_Reconstruction_Coefficients<r, T>::d[i] / std::pow(epsilon + s[i], 2);
+    wt += w[i];
+  }
+
+  /*
+   * output
+   */
+  T out = 0.0;
+  for(int i = 0; i < r; ++i) {
+    out += q[i] * w[i] / wt;
+  }
+
+  return out;
+
+}
 
 
 #endif //POLYPACK__WENO_H
