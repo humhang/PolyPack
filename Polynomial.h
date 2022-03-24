@@ -41,7 +41,9 @@ public:
   /*
    * constructor from coefficients
    */
-  explicit constexpr Polynomial(const std::array<T, N + 1> &_coeffs) : coeffs(_coeffs) {};
+  template<typename ForwardReference,
+           std::enable_if_t<std::is_same_v<std::decay_t<ForwardReference>, std::array<T, N+1>>, void*> = nullptr>
+  explicit constexpr Polynomial(ForwardReference &&_coeffs) : coeffs(std::forward<ForwardReference>(_coeffs)) {};
 
   /*
    * trivial copy constructor
@@ -67,7 +69,7 @@ public:
    * constructor from roots and the leading coefficient (highest degree), for degree > 0
    */
   template<unsigned int N_ = N,
-      typename std::enable_if<(N_ > 0), void *>::type = nullptr>
+          std::enable_if_t<(N_ > 0), void *> = nullptr>
   constexpr Polynomial(const std::array<T, N> &roots, T leading_term) : coeffs({}) {
 
     /*
@@ -89,8 +91,8 @@ public:
    * constructor from roots and the leading coefficient (the highest degree), for degree == 0
    */
   template<unsigned int N_ = N,
-      typename std::enable_if<(N_ == 0), void *>::type = nullptr>
-  constexpr Polynomial(const std::array<T, N> &roots, T leading_term) : coeffs({}) {
+      std::enable_if_t<(N_ == 0), void *> = nullptr>
+  constexpr Polynomial([[maybe_unused]] const std::array<T, N> &roots, T leading_term) : coeffs({}) {
 
     coeffs[0] = leading_term;
 
@@ -172,7 +174,7 @@ public:
    * evaluate recursively with Horner's method, for polynomial deg > 0
    */
   template<typename... Dummy, unsigned int N_ = N>
-  constexpr typename std::enable_if<(N_ > 0), T>::type
+  constexpr std::enable_if_t<(N_ > 0), T>
   evaluate(const T t) const {
     static_assert(sizeof...(Dummy) == 0, "Do not specify template arguments!");
 
@@ -185,7 +187,7 @@ public:
    * evaluate recursively with Horner's method, for polynomial deg == 0
    */
   template<typename... Dummy, unsigned int N_ = N>
-  constexpr typename std::enable_if<(N_ == 0), T>::type
+  constexpr std::enable_if_t<(N_ == 0), T>
   evaluate(const T /*t*/) const {
     static_assert(sizeof...(Dummy) == 0, "Do not specify template arguments!");
 
@@ -204,7 +206,7 @@ public:
    * taking r-th derivative for polynomial, if r > 1 and degree > 0
    */
   template<unsigned int r = 1, typename... Dummy, unsigned int N_ = N>
-  constexpr typename std::enable_if<((N_ > 0) && (r > 1)), Polynomial<minusOrZero(N_, r), T> >::type
+  constexpr std::enable_if_t<((N_ > 0) && (r > 1)), Polynomial<minusOrZero(N_, r), T> >
   derivative() const {
 
     static_assert(sizeof...(Dummy) == 0, "Do not specify template arguments other than the number of derivative!");
@@ -219,7 +221,7 @@ public:
    * taking r-th derivative for polynomial, if r = 1 and degree > 0
    */
   template<unsigned int r = 1, typename... Dummy, unsigned int N_ = N>
-  constexpr typename std::enable_if<((N_ > 0) && (r == 1)), Polynomial<minusOrZero(N_, r), T> >::type
+  constexpr std::enable_if_t<((N_ > 0) && (r == 1)), Polynomial<minusOrZero(N_, r), T> >
   derivative() const {
 
     static_assert(sizeof...(Dummy) == 0, "Do not specify template arguments other than the number of derivative!");
@@ -235,7 +237,7 @@ public:
    * taking r-th derivative for polynomial, if r >= 0 and degree = 0
    */
   template<unsigned int r = 1, typename... Dummy, unsigned int N_ = N>
-  constexpr typename std::enable_if<((N_ == 0) && (r >= 1)), Polynomial<0, T> >::type
+  constexpr std::enable_if_t<((N_ == 0) && (r >= 1)), Polynomial<0, T> >
   derivative() const {
 
     static_assert(sizeof...(Dummy) == 0, "Do not specify template arguments other than the number of derivative!");
@@ -249,7 +251,7 @@ public:
    * taking r-th derivative for polynomial, if r = 0
    */
   template<unsigned int r = 1, typename... Dummy, unsigned int N_ = N>
-  constexpr typename std::enable_if<((r == 0)), Polynomial<N_, T> >::type
+  constexpr std::enable_if_t<(r == 0), Polynomial<N_, T> >
   derivative() const {
 
     static_assert(sizeof...(Dummy) == 0, "Do not specify template arguments other than the number of derivative!");
@@ -260,7 +262,7 @@ public:
 
   /*
    * indefinite integral of the polynomial
-   * TODO: maybe we can make this recursive just like others;
+   * TODO: maybe we can make this recursive just like others
    */
   constexpr Polynomial<N + 1, T>
   integrate(const T constant = 0) const {

@@ -112,5 +112,15 @@ int main() {
   }
 #endif
 
+  {
+    /*
+     * WENO reconstruction test
+     */
+    constexpr std::array<double, 5> array{1.0, 2.0, 3.0, 4.0, 100.0};
+    const double out = do_WENO<3>(array.data());
+    std::cout << std::setprecision(16) << out;
+
+  }
+
   return 0;
 }

@@ -73,7 +73,7 @@ std::false_type test_has_operatorPlus(...);
 
 template<typename T>
 std::true_type test_has_operatorPlus(std::remove_reference_t<decltype(std::declval<T>()+(std::declval<T>()))>*,
-                                     std::enable_if_t<std::is_same<std::remove_cv_t<std::remove_reference_t<decltype(std::declval<T>()+(std::declval<T>()))>>, T>::value, void*>);
+                                     std::enable_if_t<std::is_same_v<std::remove_cv_t<std::remove_reference_t<decltype(std::declval<T>()+(std::declval<T>()))>>, T>, void*>);
 
 template<typename T>
 struct has_operatorPlus {
@@ -85,7 +85,7 @@ std::false_type test_has_operatorMinus(...);
 
 template<typename T>
 std::true_type test_has_operatorMinus(std::remove_reference_t<decltype(std::declval<T>()-(std::declval<T>()))>*,
-                                      std::enable_if_t<std::is_same<std::remove_cv_t<std::remove_reference_t<decltype(std::declval<T>()-(std::declval<T>()))>>, T>::value, void*>);
+                                      std::enable_if_t<std::is_same_v<std::remove_cv_t<std::remove_reference_t<decltype(std::declval<T>()-(std::declval<T>()))>>, T>, void*>);
 
 template<typename T>
 struct has_operatorMinus {
@@ -97,7 +97,7 @@ std::false_type test_has_operatorMultiply(...);
 
 template<typename T>
 std::true_type test_has_operatorMultiply(std::remove_reference_t<decltype(std::declval<T>()*(std::declval<T>()))>*,
-                                     std::enable_if_t<std::is_same<std::remove_cv_t<std::remove_reference_t<decltype(std::declval<T>()*(std::declval<T>()))>>, T>::value, void*>);
+                                     std::enable_if_t<std::is_same_v<std::remove_cv_t<std::remove_reference_t<decltype(std::declval<T>()*(std::declval<T>()))>>, T>, void*>);
 
 template<typename T>
 struct has_operatorMultiply {
@@ -109,7 +109,7 @@ std::false_type test_has_operatorDivide(...);
 
 template<typename T>
 std::true_type test_has_operatorDivide(std::remove_reference_t<decltype(std::declval<T>()/(std::declval<T>()))>*,
-                                    std::enable_if_t<std::is_same<std::remove_cv_t<std::remove_reference_t<decltype(std::declval<T>()/(std::declval<T>()))>>, T>::value, void*>);
+                                    std::enable_if_t<std::is_same_v<std::remove_cv_t<std::remove_reference_t<decltype(std::declval<T>()/(std::declval<T>()))>>, T>, void*>);
 
 template<typename T>
 struct has_operatorDivide {
@@ -126,7 +126,7 @@ struct hasAllOperators {
 
 template<typename T>
 struct is_field {
-  static constexpr bool value = hasAllOperators<T>::value;
+  static constexpr bool value = hasAllOperators<T>::value && std::is_same_v<std::decay_t<T>, T>;
 };
 
 template<>
@@ -156,7 +156,7 @@ struct half<double> {
 
 template<>
 struct half<long double> {
-  static constexpr long double value = 0.5l;
+  static constexpr long double value = 0.5L;
 };
 
 #ifdef HAS_BOOST
