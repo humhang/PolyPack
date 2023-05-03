@@ -1,13 +1,17 @@
 
 #include <iostream>
 #include <array>
+#include <type_traits>
+
+#ifdef HAS_BOOST
+#include "boost/rational.hpp"
+#endif
 
 #include "Polynomial.h"
 #include "LagrangeInterpolation.h"
 #include "UniformGridInterpolationAndReconstruction.h"
 #include "WENO.h"
 
-#include <type_traits>
 
 int main() {
 
@@ -97,7 +101,26 @@ int main() {
     constexpr auto s = WENO_Uniform_Reconstruction_Coefficients<3, double>::s;
   }
 
+#ifdef HAS_BOOST
+  {
+    /*
+     * WENO-JS coefficients, rational number
+     */
+    constexpr auto c = WENO_Uniform_Reconstruction_Coefficients<3, boost::rational<int>>::c;
+    constexpr auto d = WENO_Uniform_Reconstruction_Coefficients<3, boost::rational<int>>::d;
+    constexpr auto s = WENO_Uniform_Reconstruction_Coefficients<3, boost::rational<int>>::s;
+  }
+#endif
 
+  {
+    /*
+     * WENO reconstruction test
+     */
+    constexpr std::array<double, 5> array{1.0, 2.0, 3.0, 4.0, 100.0};
+    const double out = do_WENO<3>(array.data());
+    std::cout << std::setprecision(16) << out;
+
+  }
 
   return 0;
 }

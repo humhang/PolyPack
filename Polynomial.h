@@ -16,6 +16,9 @@
  */
 template<unsigned int N, typename T>
 class Polynomial {
+
+  static_assert(is_field<T>::value);
+
 public:
 
   /*
@@ -38,7 +41,9 @@ public:
   /*
    * constructor from coefficients
    */
-  explicit constexpr Polynomial(const std::array<T, N + 1> &_coeffs) : coeffs(_coeffs) {};
+  template<typename ForwardReference,
+           std::enable_if_t<std::is_same_v<std::decay_t<ForwardReference>, std::array<T, N+1>>, void*> = nullptr>
+  explicit constexpr Polynomial(ForwardReference &&_coeffs) : coeffs(std::forward<ForwardReference>(_coeffs)) {};
 
   /*
    * trivial copy constructor
@@ -74,7 +79,6 @@ public:
         roots_poly_one_degree_less[n] = roots[n];
       }
       Polynomial<N - 1, T> poly_one_order_less(roots_poly_one_degree_less, leading_term);
-
       Polynomial<1, T> poly1(std::array<T, 2>{-roots[N - 1], 1});
 
       coeffs = std::move((poly_one_order_less * poly1).coeffs);
@@ -212,10 +216,9 @@ public:
   }
 
 
-
   /*
    * indefinite integral of the polynomial
-   * TODO: maybe we can make this recursive just like others;
+   * TODO: maybe we can make this recursive just like others
    */
   constexpr Polynomial<N + 1, T>
   integrate(const T constant = 0) const {

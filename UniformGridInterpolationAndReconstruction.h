@@ -37,7 +37,7 @@ calculate_interpolation_coefficients_from_cell_to_face_for_uniformly_spaced_poin
     }
   }
 
-  return lagrange_interpolation_coefficients<Npts, T, OrderOfDerivative>(stencils, 0.5);
+  return lagrange_interpolation_coefficients<Npts, T, OrderOfDerivative>(stencils, half<T>::value);
 
 }
 
@@ -95,11 +95,11 @@ calculate_reconstruction_coefficients_from_cell_to_face_for_uniformly_spaced_poi
 
   if constexpr(is_odd(Npts)) {
     for(unsigned int k = 0; k < Npts+1; ++k) {
-      faces[k] =  - (static_cast<T>(Npts)-1)/2+static_cast<T>(bias) + static_cast<T>(k) - 0.5;
+      faces[k] =  - (static_cast<T>(Npts)-1)/2+static_cast<T>(bias) + static_cast<T>(k) - half<T>::value;
     }
   } else {
     for(unsigned int k = 0; k < Npts+1; ++k) {
-      faces[k] =  - static_cast<T>(Npts)/2+static_cast<T>(bias)+1 + static_cast<T>(k) - 0.5;
+      faces[k] =  - static_cast<T>(Npts)/2+static_cast<T>(bias)+1 + static_cast<T>(k) - half<T>::value;
     }
   }
   const std::array<Polynomial<Npts, T>, Npts+1> basis_integral = lagrange_interpolation_basis_polynomial(faces);
@@ -114,7 +114,7 @@ calculate_reconstruction_coefficients_from_cell_to_face_for_uniformly_spaced_poi
 
   for(unsigned int pt = 0; pt < Npts; ++pt) {
 
-    coefficients[pt] = basis[pt].template derivative<OrderOfDerivative>().evaluate(0.5);
+    coefficients[pt] = basis[pt].template derivative<OrderOfDerivative>().evaluate(half<T>::value);
 
   }
 
