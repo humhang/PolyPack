@@ -68,8 +68,8 @@ template<typename>
 std::false_type test_has_operatorPlus(...);
 
 template<typename T>
-std::true_type test_has_operatorPlus(std::remove_reference_t<decltype(std::declval<T>().operator*(std::declval<T>()))>*,
-                                     std::enable_if_t<std::is_same<std::remove_cv_t<std::remove_reference_t<decltype(std::declval<T>().operator*(std::declval<T>()))>>, T>::value, void*>);
+std::true_type test_has_operatorPlus(std::remove_reference_t<decltype(std::declval<T>()+std::declval<T>())>*,
+                                     std::enable_if_t<std::is_same<std::remove_cv_t<std::remove_reference_t<decltype(std::declval<T>()+std::declval<T>())>>, T>::value, void*>);
 
 template<typename T>
 struct has_operatorPlus {
@@ -80,8 +80,8 @@ template<typename>
 std::false_type test_has_operatorMultiply(...);
 
 template<typename T>
-std::true_type test_has_operatorMultiply(std::remove_reference_t<decltype(std::declval<T>().operator*(std::declval<T>()))>*,
-                                     std::enable_if_t<std::is_same<std::remove_cv_t<std::remove_reference_t<decltype(std::declval<T>().operator*(std::declval<T>()))>>, T>::value, void*>);
+std::true_type test_has_operatorMultiply(std::remove_reference_t<decltype(std::declval<T>()*std::declval<T>())>*,
+                                     std::enable_if_t<std::is_same<std::remove_cv_t<std::remove_reference_t<decltype(std::declval<T>()*std::declval<T>())>>, T>::value, void*>);
 
 template<typename T>
 struct has_operatorMultiply {
