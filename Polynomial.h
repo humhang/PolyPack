@@ -10,14 +10,14 @@
 #include <algorithm>
 
 #include "Helper.h"
+#include "Field.h"
 
 /*
  * N-deg polynomial over field T
  */
 template<unsigned int N, typename T>
 class Polynomial {
-
-  static_assert(is_field<T>::value);
+  static_assert(field<T>);
 
 public:
 

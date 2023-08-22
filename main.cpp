@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <array>
+#include <iomanip>
 #include <type_traits>
 
 #ifdef HAS_BOOST
