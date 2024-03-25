@@ -16,9 +16,8 @@
  * N-deg polynomial over field T
  */
 template<unsigned int N, typename T>
+  requires field<T>
 class Polynomial {
-  static_assert(field<T>);
-
 public:
 
   /*
@@ -39,10 +38,10 @@ public:
   constexpr Polynomial() : coeffs({}) {};
 
   /*
-   * constructor from coefficients
+   * constructor from constructor of coeffs.
    */
-  template<typename ForwardReference,
-           std::enable_if_t<std::is_same_v<std::decay_t<ForwardReference>, std::array<T, N+1>>, void*> = nullptr>
+  template<typename ForwardReference>
+    requires std::constructible_from<std::array<T, N + 1>, std::decay_t<ForwardReference>>
   explicit constexpr Polynomial(ForwardReference &&_coeffs) : coeffs(std::forward<ForwardReference>(_coeffs)) {};
 
   /*
